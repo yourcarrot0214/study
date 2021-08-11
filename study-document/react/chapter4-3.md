@@ -27,33 +27,33 @@
 
 ```js
 // ./src/04/Theme.js
-exprt default {
-    // 색상
-    color: {
-        primary: '#03a9f4',
-        secondary: '#795548',
-        white: '#FFFFFF',
-        gray: '#CCCCCC',
-        default: '#999999',
-    },
-    // 글꼴 크기
-    size: {
-        xg: 24,
-        lg: 18,
-        md: 14,
-        sm: 12,
-        xs: 10,
-    },
-    lineHeight: {
-        xg: '60px',
-        lg: '54px',
-        md: '36px',
-        sm: '24px',
-        xs: '18px',
-    },
-    // 길이 단위
-    unit: 4,
-}
+export default {
+  // 색상
+  color: {
+    primary: "#03a9f4",
+    secondary: "#795548",
+    white: "#FFFFFF",
+    gray: "#CCCCCC",
+    default: "#999999",
+  },
+  // 글꼴 크기
+  size: {
+    xg: 24,
+    lg: 18,
+    md: 14,
+    sm: 12,
+    xs: 10,
+  },
+  lineHeight: {
+    xg: "60px",
+    lg: "54px",
+    md: "36px",
+    sm: "24px",
+    xs: "18px",
+  },
+  // 길이 단위
+  unit: 4,
+};
 ```
 
 <br>
@@ -128,31 +128,27 @@ react-with-styles로 스타일을 적용하려면 반환값이 함수인 커링 
 ```js
 // src/04/Text.jsx
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import withStyles, { css } from './withStyles;
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import withStyles, { css } from "./withStyles";
 
 class Text extends PureComponent {
-    render() {
-        const { children, styles } = this.props;
+  render() {
+    const { children, styles } = this.props;
 
-        return (
-            <span {...css(styles.default)}>
-                {children}
-            </span>
-        )
-    }
+    return <span {...css(styles.default)}>{children}</span>;
+  }
 }
 
 Text.propTypes = {
-    children: PropTypes.node.isRequired,
-}
+  children: PropTypes.node.isRequired,
+};
 
-export default withStyles(({ color, size}) => ({
-    default: {
-        color: color.default,
-        fontSize: size.md,
-    }
+export default withStyles(({ color, size }) => ({
+  default: {
+    color: color.default,
+    fontSize: size.md,
+  },
 }))(Text);
 ```
 
@@ -172,66 +168,74 @@ export default withStyles(({ color, size}) => ({
 ```js
 // src/04/Text.jsx
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import withStyles, { css } from './withStyles;
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import withStyles, { css } from "./withStyles";
 
 class Text extends PureComponent {
-    render() {
-        const { children, styles, large, xlarge, small, xsmall, primary, secondary } = this.props;
+  render() {
+    const {
+      children,
+      styles,
+      large,
+      xlarge,
+      small,
+      xsmall,
+      primary,
+      secondary,
+    } = this.props;
 
-        return (
-            <span
-                {...css(
-                    styles.default,
-                    xsmall && styles.xsmall,
-                    small && styles.small,
-                    large && styles.large,
-                    xlarge && styles.xlarge,
-                    secondary && styles.secondary,
-                    primary && styles.primary,
-                    )
-                }
-            >
-                {children}
-            </span>
-        );
-    }
+    return (
+      <span
+        {...css(
+          styles.default,
+          xsmall && styles.xsmall,
+          small && styles.small,
+          large && styles.large,
+          xlarge && styles.xlarge,
+          secondary && styles.secondary,
+          primary && styles.primary
+        )}
+      >
+        {children}
+      </span>
+    );
+  }
 }
 
 Text.propTypes = {
-    children: PropTypes.node.isRequired,
-    xsmall: PropTypes.bool,
-    small: PropTypes.bool,
-    large: PropTypes.bool,
-    xlarge: PropTypes.bool,
-    secondary: PropTypes.bool,
-    primary: PropTypes.bool,
-}
+  children: PropTypes.node.isRequired,
+  xsmall: PropTypes.bool,
+  small: PropTypes.bool,
+  large: PropTypes.bool,
+  xlarge: PropTypes.bool,
+  secondary: PropTypes.bool,
+  primary: PropTypes.bool,
+};
 
-export default withStyles(({ color, size}) => ({
-    default: {
-        color: color.default,
-        fontSize: size.md,
-    },
-    xlarge: {
-        fontSize: size.xg,
-    },
-    large: {
-        fontSize: size.lg,
-    },
-    small: {
-        fontSize: size.sm,
-    },
-    xsmall: {
-        fontSize: size.xs,
-    },
-    primary: {
-        color: color.primary,
-    },
-    secondary: {
-        color: color.secondary,
-    }
+export default withStyles(({ color, size }) => ({
+  default: {
+    color: color.default,
+    fontSize: size.md,
+  },
+  xlarge: {
+    fontSize: size.xg,
+  },
+  large: {
+    fontSize: size.lg,
+  },
+  small: {
+    fontSize: size.sm,
+  },
+  xsmall: {
+    fontSize: size.xs,
+  },
+  primary: {
+    color: color.primary,
+  },
+  secondary: {
+    color: color.secondary,
+  },
 }))(Text);
 ```
 
@@ -361,30 +365,33 @@ export default withStyles(({ color, size, unit }) => ({
 ```js
 // ./04/Theme.js
 
-export const LARGE_AND_ABOVE = 'largeAndAbove';
+export const LARGE_AND_ABOVE = "largeAndAbove";
 const BREAKPOINT_NAMES = {
-    LARGE: 'large',
-    MEDIUM: 'medium',
-    SMALL: 'small',,
+  LARGE: "large",
+  MEDIUM: "medium",
+  SMALL: "small",
 };
 
-const breeakpoints = {
-    [BREAKPOINT_NAMES.LARGE]: 1128,
-    [BREAKPOINT_NAMES.MEDIUM]: 744,
-    [BREAKPOINT_NAMES.SMALL]: 327,
+const breakpoints = {
+  [BREAKPOINT_NAMES.LARGE]: 1128,
+  [BREAKPOINT_NAMES.MEDIUM]: 744,
+  [BREAKPOINT_NAMES.SMALL]: 327,
 };
 
 const responsive = {
-    [LARGE_AND_ABOVE]: `@media (min-width: ${breakpoints[BREAKPOINT_NAMES.LARGE]}px`,
-    [BREAKPOINT_NAMES.SMALL]: `@media (max-width: ${breakpoints[BREAKPOINT_NAMES.MEDIUM] - 1}px)`,
-    print: '@media print',
+  [LARGE_AND_ABOVE]: `@media (min-width: ${
+    breakpoints[BREAKPOINT_NAMES.LARGE]
+  }px`,
+  [BREAKPOINT_NAMES.SMALL]: `@media (max-width: ${
+    breakpoints[BREAKPOINT_NAMES.MEDIUM] - 1
+  }px)`,
+  print: "@media print",
 };
 
 export default {
-    // ..(기존 테마 파일에 있던 색상, 폰트, 사이즈, 길이 단위)
-    responsive,
+  // ..(기존 테마 파일에 있던 색상, 폰트, 사이즈, 길이 단위)
+  responsive,
 };
-
 ```
 
 <br>
