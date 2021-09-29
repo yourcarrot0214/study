@@ -1,39 +1,36 @@
-class Orange {
-  private name = "Orange";
-  constructor(private brix: number = 0) {}
-  getName(): string {
-    return this.name;
-  }
-  getBrix(): number {
-    return this.brix;
-  }
+let add: (x: number, y: number) => number = function (
+  x: number,
+  y: number
+): number {
+  return x + y;
+};
+
+let result: number = add(1, 2);
+console.log(result);
+
+let maAdd = (x: number, y: number) => x + y;
+
+function buildName(firstName: string, lastName?: string) {
+  return `${firstName} ${lastName}`;
 }
 
-class Apple {
-  private name = "Apple";
-  constructor(private brix: number = 0) {}
-  getName(): string {
-    return this.name;
-  }
-  getBrix(): number {
-    return this.brix;
-  }
-}
+let username = buildName("wilted");
+console.log(username);
 
-class Box<T> {
-  constructor(private fruit: T) {}
-  getFruit(): T {
-    return this.fruit;
-  }
-}
+let deck = {
+  suits: ["hearts", "spades", "clubs", "diamonds"],
+  cards: Array(52),
+  createCardPicker: function () {
+    return function () {
+      let pickedCard = Math.floor(Math.random() * 52);
+      let pickedSuit = Math.floor(pickedCard / 13);
 
-const box: Box<Orange> = new Box(new Orange(5));
-console.log(box.getFruit().getName());
-console.log(box);
+      return { suit: this.suits[pickedSuit], card: pickedCard % 13 };
+    };
+  },
+};
 
-// Generic을 지정하지 않은 상태로 string 값을 넘겨주면 자동으로 <String> 추론 된다.
-// 이에 stringBox는 compile을 pass하게 된다.
-const stringBox = new Box("string");
-// string이 가지고 있지 않은 getName() 메서드 호출로 compile error가 발생한다.
-// console.log(stringBox.getFruit().getName());
-console.log(stringBox);
+let cardPicker = deck.createCardPicker();
+let pickedCard = cardPicker();
+
+console.log("card: " + pickedCard.card + " of " + pickedCard.suit);
