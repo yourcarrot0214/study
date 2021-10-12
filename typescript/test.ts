@@ -87,7 +87,7 @@ const samsung: Mobile<string> = {
   option: "getting ready",
 };
 
-interface User {
+interface User1 {
   name: string;
   age: number;
 }
@@ -101,7 +101,7 @@ interface Book {
   price: number;
 }
 
-const user: User = { name: "Carrot", age: 35 };
+const user: User1 = { name: "Carrot", age: 35 };
 const car: Car = { name: "Tesla", color: "white" };
 const book: Book = { price: 39000 };
 
@@ -111,4 +111,4 @@ function printName<T extends { name: string }>(data: T): string {
 
 printName(user);
 printName(car);
-printName(book);
+// printName(book);
